@@ -11,21 +11,16 @@ void main() {
         System.out.println("1. MOSTRAR ESTADO INICIAL");
         System.out.println("2. CREAR PERSONAJE");
         System.out.println("3. BUSCAR");
-        System.out.println("4. GANAR ESPERIENCIA");
-        System.out.println("5. SUBIR DE NIVEL");
-        System.out.println("6. APLICAR DAÑO");
-        System.out.println("7. CURARLO");
-        System.out.println("8. MOSTRAR ESTADO FINAL");
+        System.out.println("4. MOSTRAR ESTADO FINAL");
 
         op = teclado.nextInt();
         switch (op) {
             case 1 -> {
                 //si no hay informacion pues mostrar que no hay informacion, pero si ha
                 //hay informacion pues mostrar que hay
-                if (Pe2.getNombre() == null) {
+                if (lstPersonaje.isEmpty()) {
                     System.out.println("No hay informacion de algun personaje");
                 } else {
-                    System.out.println(lstPersonaje);
                     for (Personaje Pe8 : lstPersonaje) {
                         System.out.println(Pe8);
                     }
@@ -40,19 +35,22 @@ void main() {
                 int nivel = teclado.nextInt();
 
                 System.out.println("Ingrese la experiencia que tiene el personaje: ");
-                String experiencia = teclado.next();
+                int experiencia = teclado.nextInt();
 
                 System.out.println("Ingrese la vida que tiene el personaje: ");
                 int vida = teclado.nextInt();
 
 //OJO QUE PUEDE QUE NO ESTE SIRVIENDO EL MISMO PE1
-                Personaje Pe1 = new Personaje (nombre, nivel, experiencia, vida);
+                Personaje Pe1 = new Personaje(nombre, nivel, experiencia, vida, true);
 
                 Pe1.setVivo(true);
                 lstPersonaje.add(Pe1);
             }
             case 3 -> {
                 String bus;
+                if (lstPersonaje.isEmpty()) {
+                    System.out.println("No hay informacion de algun personaje");
+                }else {
                 System.out.println("Ingrese el nombre del personaje");
                 bus = teclado.next();
 
@@ -69,42 +67,47 @@ void main() {
                          2.Subir de nivel
                          3.Aplicar daño
                          4.Curarlo
+                         5.Mostrar todo
                         """);
                 int opc;
                 opc = teclado.nextInt();
                 switch (opc) {
 
                     case 1 -> {
-                        System.out.println("Ingrese la cantidad de experiencia que le quiere añadir al personaje ");
-                        int experiencia = teclado.nextInt();
-                        Pe3.ganarExperiencia();
-                        System.out.println("Ahora tiene: " + experiencia);
+
+                        Perso.ganarExperiencia();
+                        System.out.println("se le subio 10, ahora su personaje tiene: " + Perso.getExperiencia());
                     }
                     case 2 -> {
 
-                        Pe3.subirNivel();
+                        Perso.subirNivel();
 
-                        System.out.println("Ahora es nivel: " + nivel);
-                        System.out.println("Su experiencia es de: " + experiencia);
+                        System.out.println("se le subio 1, ahora es nivel: " + Perso.getNivel());
+                        System.out.println("Su experiencia se reinicio, ahora tiene: " + Perso.getExperiencia());
                     }
                     case 3 -> {
 
-                        Pe3.recibirDanio();
-                        System.out.println("Su vida actual es: " + vida);
+                        Perso.recibirDanio();
+                        System.out.println("Su vida es: " + Perso.getVida() + ", El estado de vida es: " + Perso.isVivo());
+
                     }
                     case 4 -> {
-                        Pe3.curarse();
-                        System.out.println("Ahora su vida es de: " + vida);
+                        Perso.curarse();
+                        System.out.println("Ahora su vida es de: " + Perso.getVida());
+                    }
+                    case 5 -> {
+                        for (Personaje p : lstPersonaje) {
+                            Perso.mostrarEstado();
+                        }
                     }
 
                     default -> System.out.println("opcion invalida");
                 }
-            }
+            }}
             case 4 -> {
-                if (Pe2.getNombre() == null) {
+                if (lstPersonaje.isEmpty()) {
                     System.out.println("No hay informacion de algun personaje");
                 } else {
-                    System.out.println(lstPersonaje);
                     for (Personaje Pe8 : lstPersonaje) {
                         System.out.println(Pe8);
                     }

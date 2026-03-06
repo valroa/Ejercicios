@@ -73,24 +73,36 @@ public Personaje(){
 
     //Experiencia
     public int ganarExperiencia(){
-        experiencia = experiencia + experiencia;
+        experiencia = experiencia + 10;
+        return experiencia;
     }
 
     //NIVEL
     public int subirNivel(){
         nivel = nivel + 1;
         experiencia = 0;
+        return nivel;
     }
     //DAÑO
     public void recibirDanio(){
         vida = vida - 15;
         if (vida <= 0){
-    vivo = false;
-        }
-    }
+            vida = 0;
+            vivo = false;
+        }else { vivo = true;
+    }}
     //CURARSE
     public int curarse(){
         vida = vida + 20;
+        return vida;
+    }
+    //MOSTRAR TODO
+    public void mostrarEstado(){
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Nivel: " + nivel);
+        System.out.println("Experiencia: " + experiencia);
+        System.out.println("Vida: " + vida);
+        System.out.println("Vivo: " + vivo);
     }
 
 
